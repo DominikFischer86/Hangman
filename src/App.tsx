@@ -4,17 +4,12 @@ import { words } from "./data/wordlist"
 import Word from "./components/Word"
 import Letters from "./components/Letters"
 import StartGame from "./components/StartGame"
+import GameOver from "./components/GameOver"
 
 import "./App.css"
 
-const alpha: number[] = Array.from(Array(26)).map((_,i) => i + 65)
-const alphabet: string[] = alpha.map(x => String.fromCharCode(x).toLowerCase())
-
-let pickedLetters: string[] = []
-let remainingLetters: string[] = []
-
 const App = () => {
-  const [key, setKey] = useState<string>("")
+  const [guessedLetters, setGuessedLetters] = useState<string[]>([])
   const [word, setWord] = useState<string>("")
   const [tries, setTries] = useState<number>(10)
   const [gamestart, setGamestart] = useState<boolean>(false)
@@ -24,14 +19,9 @@ const App = () => {
     if (tries <= 0) setGameOver(true)
   }, [tries])
 
-  const getKey = (keyId: string) => {
-    setKey(keyId)
-    evaluateResult(keyId)
-  }
-
-  const evaluateResult = (keyId: string) => {
-    pickedLetters.push(keyId)
-    if (word.includes(keyId)) return
+  const getKey = (letter: string) => {
+    setGuessedLetters((currentLetters: string[]) => [...currentLetters, letter])
+    if (word.includes(letter)) return
     else return setTries(tries => tries-1)
   }
 
@@ -45,24 +35,26 @@ const App = () => {
     setWord(getRandomWord(words))
   }
 
-  remainingLetters = alphabet.filter((letter: string) => !pickedLetters.includes(letter))
-
   return (
     <div className="board">
       {!gamestart && <StartGame handleStart={handleStart} />}
-      {gamestart && !gameOver &&
+      {gamestart && 
         <div className="main">
           <p>Lives: {tries}</p>
-          <Word word={word} currentLetter={key} />
-          <Letters 
-            alphabet={alphabet} 
-            remainingLetters={remainingLetters} 
-            pickedLetters={pickedLetters} 
-            getKey={getKey} 
+          <Word 
+            word={word} 
+            guessedLetters={guessedLetters} 
+            gameOver={gameOver} 
           />
+          {!gameOver &&
+            <Letters 
+              getKey={getKey}
+              guessedLetters={guessedLetters}
+            />
+          }
+          {gameOver && <GameOver />}
         </div>
       }
-      {gameOver && <p className="gameOver">Game Over!</p>}
     </div>
   )
 }
