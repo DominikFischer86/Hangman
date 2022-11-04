@@ -9,6 +9,6 @@ const StartGame = ({handleStart}: StartGameProps): JSX.Element => {
         <button onClick={handleStart}>Start Game</button>
       </div>
     )
-  }
+}
 
-  export default StartGame
+export default StartGame

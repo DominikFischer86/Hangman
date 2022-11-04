@@ -22,6 +22,7 @@ const Letters = ({getKey, guessedLetters}: LetterProps): JSX.Element => {
         ))
       }
     </div>
-  )}
+  )
+}
 
-  export default Letters
+export default Letters

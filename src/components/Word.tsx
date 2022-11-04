@@ -6,33 +6,31 @@ type WordProps = {
 }
 
 const Word = ({word, guessedLetters, gameOver, victory}: WordProps): JSX.Element => {
-    const wordArray : string[] = Array.from(word)
+  const wordArray: string[] = Array.from(word)
 
-    const wordToGuess = wordArray.map(
-        (letter: string, i: number): JSX.Element => {
-          const letterFound: boolean = guessedLetters.includes(letter) || gameOver
+  const wordToGuess = wordArray.map(
+      (letter: string, i: number): JSX.Element => {
+        const letterFound: boolean = guessedLetters.includes(letter) || gameOver
 
-          return (
-            <span key={i} className={letterFound ? "blanks visibleLetter" : "blanks"}>
-              {letterFound &&  
-              <span 
-                className={gameOver ? "letter red": victory ? "letter green" :"letter"} 
-              >
+        return (
+          <span key={i} className={letterFound ? "blanks visibleLetter" : "blanks"}>
+            {letterFound &&  
+              <span className={gameOver ? "letter red": victory ? "letter green" :"letter"}>
                 {letter}
               </span>
-              }
-            </span>
-          )
-        }
-    )
+            }
+          </span>
+        )
+      }
+  )
 
-    return (
-      <div>
-        <div className="word">
-          {wordToGuess}
-        </div>
+  return (
+    <div>
+      <div className="word">
+        {wordToGuess}
       </div>
-    )
-  }
+    </div>
+  )
+}
 
-  export default Word
+export default Word

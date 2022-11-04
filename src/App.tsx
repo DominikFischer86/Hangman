@@ -6,6 +6,7 @@ import Letters from "./components/Letters"
 import StartGame from "./components/StartGame"
 import GameOver from "./components/GameOver"
 import Victory from "./components/Victory"
+import Gallows from "./components/Gallows"
 
 import "./App.css"
 
@@ -49,7 +50,11 @@ const App = () => {
       {!gamestart && <StartGame handleStart={handleStart} />}
       {gamestart && 
         <div className="main">
-          <p>Lives: {tries}</p>
+          <Gallows 
+            tries={tries} 
+            gameOver={gameOver} 
+            victory={victory}
+          />
           <Word 
             word={word} 
             guessedLetters={guessedLetters} 
