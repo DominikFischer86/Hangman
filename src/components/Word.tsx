@@ -1,62 +1,30 @@
-import { useState, useEffect } from "react"
-import { mergeArrays } from "../helpers/helpers"
-
 type WordProps = {
     word: string
-    currentLetter: string
+    guessedLetters: string[]
+    gameOver: boolean
 }
 
-let guessedWordArrayHistory: string[][] = []
-let previousArray: any = []
-let finalArray: any = []
-
-const Word = ({word, currentLetter}: WordProps): JSX.Element => {
-    const [finalWord, setFinalWord] = useState<string[]>([])
+const Word = ({word, guessedLetters, gameOver}: WordProps): JSX.Element => {
     const wordArray : string[] = Array.from(word)
-    const wordArrayWithCorrectLetters: string[] = wordArray.map(
-      (letter: string) => 
-      letter === currentLetter
-        ? currentLetter
-        : "_"
-      )
 
-    if (wordArray.includes(currentLetter)) guessedWordArrayHistory.push(wordArrayWithCorrectLetters)
-    const lastTwoFromArray = guessedWordArrayHistory.slice(-2)
-
-    lastTwoFromArray.forEach(array => {
-      finalArray = mergeArrays(array, previousArray)
-      previousArray = array
-    })
-
-    useEffect(()=> {
-      setFinalWord(finalArray)
-    }, [finalArray])
-
-    
-
-    const loopFromThis = !finalWord.length ? wordArrayWithCorrectLetters : finalWord
-
-    console.log(finalWord)
-
-    const wordToGuess = loopFromThis.map(
+    const wordToGuess = wordArray.map(
         (letter: string, i: number): JSX.Element => {
-            if(currentLetter !== letter) return (<span key={i}> </span>)
-            return (<span key={i}>{letter}</span>)
+          return (
+            <span key={i} className="blanks">
+              <span 
+              className={guessedLetters.includes(letter) ? "letter visible" : gameOver ? "letter visible red": "letter"} 
+              >
+                {letter}
+              </span>
+            </span>
+          )
         }
-    )
-    
-    const blanks = wordArray.map(
-        (_: string, i: number): JSX.Element => 
-        (<span key={i}>_</span>)
     )
 
     return (
       <div>
         <div className="word">
           {wordToGuess}
-        </div>
-        <div className="blanks">
-          {blanks}
         </div>
       </div>
     )

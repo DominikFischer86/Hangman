@@ -23,7 +23,7 @@ body {
     height: 100%;
 }
 
-.startGame button {
+.startGame button, .gameOver button {
     width: 100%;
     padding: 20px;
     background: green;
@@ -37,7 +37,8 @@ body {
     transition: background .5s ease;
 }
 
-.startGame button:hover {
+.startGame button:hover,
+.gameOver button:hover {
     background: rgb(44, 187, 0);
 }
 
@@ -79,11 +80,29 @@ body {
     align-items: center;
 }
 
-.word, .blanks {
+.word {
+    display: flex;
     font-weight: bold;
     font-size: 20px;
-    line-height: .5rem;
     text-transform: uppercase;
+}
+
+.blanks {
+    border-bottom: 3px solid #000;
+    margin: 0 5px;
+}
+
+.letter {
+    visibility: hidden;
+    margin: 0 5px;
+}
+
+.letter.visible {
+    visibility: visible;
+}
+
+.letter.visible.red {
+    color: red;
 }
 
 .blanks span, .word span {
@@ -99,15 +118,29 @@ body {
     margin: 2px;
     width: calc(100% / 8 - 5px);
     transition: background .25s ease;
+    cursor: pointer;
 }
 
 .letters:hover {
     background: rgba(0,0,0,.25);
 }
 
-.gameOver {
+.letters:disabled {
+    cursor: default;
+}
+
+.letters:disabled:hover {
+    background: none;
+}
+
+.gameOver p {
     font-size: 50px;
+    margin: 0;
     font-weight: bold;
     text-transform: uppercase;
     text-align: center;
+}
+
+.gameOver button {
+    background: red;
 }
