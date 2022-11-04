@@ -8,7 +8,7 @@ body {
 
 .board {
     width: 400px;
-    height: 300px;
+    height: 400px;
     background: #fff;
     border-radius: 10px;
     box-shadow: 1px 1px 5px 5px rgba(0,0,0,.2);
@@ -23,7 +23,9 @@ body {
     height: 100%;
 }
 
-.startGame button, .gameOver button {
+.startGame button,
+.victory button, 
+.gameOver button {
     width: 100%;
     padding: 20px;
     background: green;
@@ -38,6 +40,7 @@ body {
 }
 
 .startGame button:hover,
+.victory button:hover, 
 .gameOver button:hover {
     background: rgb(44, 187, 0);
 }
@@ -90,19 +93,24 @@ body {
 .blanks {
     border-bottom: 3px solid #000;
     margin: 0 5px;
+    width: 30px;
+    padding-top: 31px;
+}
+
+.blanks.visibleLetter {
+    padding-top: 0;
 }
 
 .letter {
-    visibility: hidden;
     margin: 0 5px;
 }
 
-.letter.visible {
-    visibility: visible;
+.letter.red {
+    color: red;
 }
 
-.letter.visible.red {
-    color: red;
+.letter.green {
+    color: green;
 }
 
 .blanks span, .word span {
@@ -133,7 +141,12 @@ body {
     background: none;
 }
 
-.gameOver p {
+.gameOver, .victory {
+    width: 100%;
+}
+
+.gameOver p,
+.victory p {
     font-size: 50px;
     margin: 0;
     font-weight: bold;
