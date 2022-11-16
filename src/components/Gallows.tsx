@@ -5,17 +5,17 @@ type GallowsProps = {
 }
 
 const Gallows = ({ tries, gameOver, victory } : GallowsProps): JSX.Element => {
-    const bodyParts: string[] = gameOver 
-        ? ["head", "body", "left_arm", "right_arm", "left_leg", "right_leg", "ropeGO"] 
+    const bodyParts: string[] = gameOver
+        ? ["head", "body", "left_arm", "right_arm", "left_leg", "right_leg", "ropeGO"]
         : ["head", "body", "left_arm", "right_arm", "left_leg", "right_leg"]
-    const gallowsParts: string[] = gameOver 
-        ? ["base", "beam", "top"] 
+    const gallowsParts: string[] = gameOver
+        ? ["base", "beam", "top"]
         : ["base", "beam", "top", "rope"]
-    
-    const getGallows = () => gallowsParts.map(part => 
+
+    const getGallows = () => gallowsParts.map(part =>
         (<div key={part} className={part}></div>))
-    
-    const getHangman = () => bodyParts.reverse().slice(tries).map(part => 
+
+    const getHangman = () => bodyParts.reverse().slice(tries).map(part =>
         (<div key={part} className={`${part} tries-${tries}`}></div>))
 
     return (
