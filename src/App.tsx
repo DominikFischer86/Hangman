@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 
-import { words } from "./data/wordlist"
+import { words } from "./data/wordlistGerman"
 import Word from "./components/Word"
 import Letters from "./components/Letters"
 import StartGame from "./components/StartGame"
@@ -30,8 +30,9 @@ const App = () => {
   }
 
   const getRandomWord = (words: string[]): string => {
-    const randomIndex: number = Math.floor(words.length * Math.random())
-    return words[randomIndex]
+    const maxWordLength = words.filter(word => word.length <= 10)
+    const randomIndex: number = Math.floor(maxWordLength.length * Math.random())
+    return maxWordLength[randomIndex]
   }
 
   const handleStart = (): void => {
@@ -48,21 +49,21 @@ const App = () => {
   return (
     <div className="board">
       {!gamestart && <StartGame handleStart={handleStart} />}
-      {gamestart && 
+      {gamestart &&
         <div className="main">
-          <Gallows 
-            tries={tries} 
-            gameOver={gameOver} 
+          <Gallows
+            tries={tries}
+            gameOver={gameOver}
             victory={victory}
           />
-          <Word 
-            word={word} 
-            guessedLetters={guessedLetters} 
+          <Word
+            word={word}
+            guessedLetters={guessedLetters}
             gameOver={gameOver}
             victory={victory}
           />
           {!gameOver && !victory &&
-            <Letters 
+            <Letters
               getKey={getKey}
               guessedLetters={guessedLetters}
             />
