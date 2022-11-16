@@ -1,7 +1,7 @@
 const Victory = () => (
     <div className="victory">
-        <p>Winner!</p>
-        <button onClick={() => window.open("/","_self")}>Play again!</button>
+        <p>Gewonnen!</p>
+        <button onClick={() => window.open("/","_self")}>Nochmal!</button>
     </div>
 )
 
