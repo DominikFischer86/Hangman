@@ -7,16 +7,27 @@ import StartGame from "./components/StartGame"
 import GameOver from "./components/GameOver"
 import Victory from "./components/Victory"
 import Gallows from "./components/Gallows"
+import WinStreakCounter from "./components/WinStreakCounter"
 
 import "./App.css"
 
+const initialState = {
+  guessedLetters: [],
+  word: "",
+  tries: 6,
+  gameStart: false,
+  gameOver: false,
+  victory: false,
+}
+
 const App = () => {
-  const [guessedLetters, setGuessedLetters] = useState<string[]>([])
-  const [word, setWord] = useState<string>("")
-  const [tries, setTries] = useState<number>(6)
-  const [gamestart, setGamestart] = useState<boolean>(false)
-  const [gameOver, setGameOver] = useState<boolean>(false)
-  const [victory, setVictory] = useState<boolean>(false)
+  const [guessedLetters, setGuessedLetters] = useState<string[]>(initialState.guessedLetters)
+  const [word, setWord] = useState<string>(initialState.word)
+  const [tries, setTries] = useState<number>(initialState.tries)
+  const [winStreak, setWinStreak] = useState<number>(0)
+  const [gamestart, setGamestart] = useState<boolean>(initialState.gameStart)
+  const [gameOver, setGameOver] = useState<boolean>(initialState.gameOver)
+  const [victory, setVictory] = useState<boolean>(initialState.victory)
 
   useEffect(() => {
     if (tries <= 0) setGameOver(true)
@@ -40,6 +51,16 @@ const App = () => {
     setWord(getRandomWord(words))
   }
 
+  const handleNewGame = (result: string): void => {
+    result === "victory" ? setWinStreak(winStreak => winStreak + 1) : setWinStreak(0)
+    setGuessedLetters(initialState.guessedLetters)
+    setWord(initialState.word)
+    setTries(initialState.tries)
+    setGamestart(initialState.gameStart)
+    setGameOver(initialState.gameOver)
+    setVictory(initialState.victory)
+  }
+
   const checkVictoryCondition = (word: string, guessedLetters: string[]) => {
     const wordArray: string[] = [...new Set(word.split(""))]
     const filteredArray: string[] = wordArray.filter(value => guessedLetters.includes(value))
@@ -51,6 +72,7 @@ const App = () => {
       {!gamestart && <StartGame handleStart={handleStart} />}
       {gamestart &&
         <div className="main">
+          {winStreak >= 2 && <WinStreakCounter winStreak={winStreak} />}
           <Gallows
             tries={tries}
             gameOver={gameOver}
@@ -68,8 +90,8 @@ const App = () => {
               guessedLetters={guessedLetters}
             />
           }
-          {gameOver && <GameOver />}
-          {victory && <Victory />}
+          {gameOver && <GameOver handleNewGame={handleNewGame} />}
+          {victory && <Victory handleNewGame={handleNewGame} />}
         </div>
       }
     </div>
