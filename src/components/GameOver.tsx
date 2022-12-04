@@ -1,7 +1,7 @@
-const GameOver = () => (
+const GameOver = ({ handleNewGame }: any) => (
     <div className="gameOver">
         <p>Game Over!</p>
-        <button onClick={() => window.open("/","_self")}>Play again!</button>
+        <button onClick={() => handleNewGame("loss")}>Nochmal probieren!</button>
     </div>
 )
 

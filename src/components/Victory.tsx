@@ -1,7 +1,7 @@
-const Victory = () => (
+const Victory = ({ handleNewGame }: any) => (
     <div className="victory">
         <p>Gewonnen!</p>
-        <button onClick={() => window.open("/","_self")}>Nochmal!</button>
+        <button onClick={() => handleNewGame("victory")}>Nochmal spielen!</button>
     </div>
 )
 
