@@ -6,7 +6,11 @@ type StartGameProps = {
   highscore: number
 }
 
-const StartGame = ({ handleStart, winStreak, highscore }: StartGameProps): JSX.Element => {
+const StartGame = ({
+  handleStart,
+  winStreak,
+  highscore,
+}: StartGameProps): JSX.Element => {
   return (
     <div className="startGame">
       <div>

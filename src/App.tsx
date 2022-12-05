@@ -81,7 +81,13 @@ const App = () => {
 
   return (
     <div className="board">
-      {!gamestart && <StartGame handleStart={handleStart} winStreak={winStreak} highscore={highscore} />}
+      {!gamestart && (
+        <StartGame
+          handleStart={handleStart}
+          winStreak={winStreak}
+          highscore={highscore}
+        />
+      )}
       {gamestart && (
         <div className="main">
           <WinStreakCounter winStreak={winStreak} highscore={highscore} />

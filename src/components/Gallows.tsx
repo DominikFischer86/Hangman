@@ -29,7 +29,7 @@ const Gallows = ({ tries, gameOver, victory }: GallowsProps): JSX.Element => {
       .slice(tries)
       .map(part => <div key={part} className={`${part} tries-${tries}`}></div>)
 
-    const getSavedHangman = () =>
+  const getSavedHangman = () =>
     bodyParts
       .reverse()
       .map(part => <div key={part} className={`${part}`}></div>)

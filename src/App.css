@@ -70,8 +70,8 @@ body {
 }
 
 .startGame h1 {
-    margin: 0;
-    font-size: 50px;
+  margin: 0;
+  font-size: 50px;
 }
 
 .startGame h1::before {
@@ -86,8 +86,8 @@ body {
 }
 
 .startGame div p {
-    margin: 0;
-    color: #000;
+  margin: 0;
+  color: #000;
 }
 
 .main {
@@ -345,17 +345,17 @@ body {
 }
 
 .gallows.victory .hangman {
-    top: 150px;
+  top: 150px;
 }
 
 .gallows.victory .hangman .right_arm {
-    transform: rotate(320deg);
-    top: 50px;
+  transform: rotate(320deg);
+  top: 50px;
 }
 
 .gallows.victory .hangman .left_arm {
-    transform: rotate(220deg);
-    top: 50px;
+  transform: rotate(220deg);
+  top: 50px;
 }
 
 .gallows.victory .hangman .head:before {
