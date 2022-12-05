@@ -1,6 +1,16 @@
-const WinStreakCounter = ({winStreak}: any) => (
+type WinstreakTypes = {
+  winStreak: number
+  highscore: number
+}
+
+const WinStreakCounter = ({ winStreak, highscore }: WinstreakTypes) => (
   <div className="winStreakCounter">
-      <p>Du hast <span>{winStreak}x</span> in Folge gewonnen!</p>
+    <p>
+      Siege in Folge: <span>{winStreak}x</span>
+    </p>
+    <p>
+      Highscore: <span>{highscore}</span>
+    </p>
   </div>
 )
 
